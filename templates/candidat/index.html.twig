@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{%  block body %}
+    <div class="container">
+        <h1>Espace candidat</h1>
+
+        {% if profil is null %}
+            <p>Bonjour {{ app.user.email }}</p>
+            <p>Vous devez completer votre profil avant de pouvoir postuler à nos annonces.</p>
+            <a href="{{ path('profil_modify') }}" class="btn btn-primary">Créer mon profil</a>
+        {% else %}
+            <p>Bonjour {{ profil.firstname }}.</p>
+            <p><a href="{{ path('annonce_index') }}" class="btn btn-primary">Voir nos offres</a></p>
+            {% if candidatures | length == 0 %}
+                <p>Vous n'avez aucune candidatures en cours.</p>
+                <p>N'hésitez pas à postuler à nos annonces.</p>
+            {% else %}
+                <p>Vos candidatures :</p>
+                {% for candidature in candidatures %}
+                    <div class="card card-body">
+                        <p>Annonce : {{ candidature.annonce.title }}</p>
+                        {% if candidature.allowed == false %}
+                            <p>Candidature en attente de validation...</p>
+                        {% else %}
+                            <p>Candidature validée par TRT-Conseil.</p>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endif %}
+    </div>
+{% endblock %}

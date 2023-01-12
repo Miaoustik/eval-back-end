@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+
+        <h1>{{ title }} mon profil</h1>
+
+        {% for message in app.flashes('profil') %}
+            <div class="alert alert-warning">
+                {{ message }}
+            </div>
+        {% endfor %}
+        {% include '_flashes.html.twig' %}
+
+        {{ form_start(profilForm) }}
+        {{ form_widget(profilForm) }}
+
+        {% if is_granted('ROLE_CANDIDAT') and profil.cvName is not null %}
+            <p>Cv actuel: <a target="_blank" href="{{ path('candidat_cv') }}">{{ profil.cvName }}</a></p>
+        {% endif %}
+
+        <button class="btn btn-primary">Enregistrer</button>
+        {{ form_end(profilForm) }}
+
+        <div class="card card-body my-3" role="button"  aria-controls="first" aria-expanded="false" data-bs-toggle="collapse" data-bs-target="#first">
+            <h2 class="display-5">Modifier mes informations de connection.</h2>
+        </div>
+
+        <div class="collapse container" id="first">
+
+            <div class="card card-body my-3" role="button" data-bs-toggle="collapse" data-bs-target="#second" aria-controls="second" aria-expanded="false">
+                <h3 class="display-6">Modifier mon adresse email.</h3>
+            </div>
+
+            <div class="collapse my-3" id="second">
+                {{ form_start(emailForm) }}
+                {{ form_widget(emailForm) }}
+                <button class="btn btn-primary">Enregistrer</button>
+                {{ form_end(emailForm) }}
+            </div>
+
+            <div class="card card-body my-3" role="button" data-bs-toggle="collapse" data-bs-target="#third" aria-expanded="false" aria-controls="third">
+                <h3 class="display-6">Modifier mon mot de passe.</h3>
+            </div>
+
+            <div class="collapse my-3" id="third">
+                {{ form_start(passwordForm) }}
+                {{ form_widget(passwordForm) }}
+                <button class="btn btn-primary">Enregistrer</button>
+                {{ form_end(passwordForm) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

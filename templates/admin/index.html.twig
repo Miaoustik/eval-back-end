@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+
+        <h1>Créer un consultant</h1>
+        {% include '_flashes.html.twig' %}
+        {{ form_start(consultantForm) }}
+        {{ form_widget(consultantForm) }}
+        <button class="btn btn-primary">Créer</button>
+        {{ form_end(consultantForm) }}
+    </div>
+{% endblock %}
+{%  block javascripts %}
+
+    {% if app.flashes('success') is not null %}
+        <script type="application/javascript">
+            let form = document.querySelector('input')
+            form.value = '';
+        </script>
+    {% endif %}
+
+{% endblock %}

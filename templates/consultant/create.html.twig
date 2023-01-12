@@ -1,0 +1,21 @@
+{% extends 'consultant/_management.html.twig' %}
+
+{% block h1 %}
+    <h1>Gerer les créations de comptes.</h1>
+{% endblock %}
+
+{% block thead %}
+    <th>Role</th>
+    <th>Email</th>
+    <th>Actions</th>
+{%  endblock %}
+
+{% block tds %}
+    <td>
+        {{ entity.roleView }}
+    </td>
+    <td>
+        {{ entity.user.email }}
+    </td>
+    {% include 'consultant/_management_form.html.twig' with {'path': 'create', 'entity': entity} %}
+{% endblock %}

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <title>TRT-Conseil</title>
+        <!-- CSS only -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+    </head>
+    <body>
+        <header>
+            <nav class="navbar navbar-expand bg-dark navbar-dark">
+                <div class="container-fluid">
+                    <a href="{{ brand | default(path('home_index')) }}" class="navbar-brand">TRT-Conseil</a>
+                </div>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a href="{{ path('annonce_index') }}" class="nav-link">Voir nos offres</a>
+                    </li>
+                    {% if is_granted('ROLE_CONSULTANT') %}
+                        <li class="nav-item">
+                            <a href="{{ path('consultant_create_index') }}" class="nav-link">Creations de comptes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ path('consultant_annonce_index') }}" class="nav-link">Creations d'annonces</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ path('consultant_candidature_index') }}" class="nav-link">Candidatures</a>
+                        </li>
+                    {%  endif %}
+                    {% if is_granted('ROLE_RECRUTEUR') %}
+                        <li class="nav-item">
+                            <a href="{{ path('recruteur_create') }}" class="nav-link">Créer une annonce</a>
+                        </li>
+                    {%  endif %}
+                    {% if is_granted('ROLE_CANDIDAT') or is_granted('ROLE_RECRUTEUR') %}
+                        <li class="nav-item">
+                            <a href="{{ path('profil_index') }}" class="nav-link">Profil</a>
+                        </li>
+                    {%  endif %}
+                    {% if app.user %}
+                        <li class="nav-item">
+                            <a href="{{ path('logout') }}" class="nav-link">Se déconnecter</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </header>
+        {% block body %}{% endblock %}
+        <footer>
+            <!-- JavaScript Bundle with Popper -->
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+            {% block javascripts %}
+                {{ encore_entry_script_tags('app') }}
+            {% endblock %}
+        </footer>
+    </body>
+</html>

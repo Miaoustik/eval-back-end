@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+
+    <h1>Mon profil</h1>
+        {% if is_granted('ROLE_CANDIDAT') %}
+            <p>Prénom: {{ profil.firstname }}</p>
+            <p>Nom: {{ profil.lastname }}</p>
+            <p>Cv: <a target="_blank" href="{{ path('candidat_cv') }}">{{ profil.cvName }}</a></p>
+            <p>Email: {{ profil.user.email }}</p>
+        {% elseif is_granted('ROLE_RECRUTEUR') %}
+            <p>Nom de la société: {{ profil.societyName }}</p>
+            <p>Adresse: {{ profil.address }}</p>
+            <p>Code postal: {{ profil.postalCode }}</p>
+            <p>Ville: {{ profil.city }}</p>
+        {% endif %}
+        <a class="btn btn-primary" href="{{ path('profil_modify') }}">Modifier mon profil</a>
+    </div>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{%  block body %}
+    <div class="container">
+        <h1>Créer une annonce</h1>
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button class="btn btn-primary">Créer</button>
+        {{ form_end(form) }}
+    </div>
+{%  endblock %}

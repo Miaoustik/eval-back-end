@@ -1,0 +1,18 @@
+<td>
+    <div class="d-inline-flex">
+        <form method="post" action="{{ path('consultant_' ~ path ~ '_add') }}">
+            <input type="hidden" name="_token"
+                   value="{{ csrf_token('add' ~ entity.id) }}">
+            <input type="hidden" name="add" value="{{ entity.id }}">
+            <input type="hidden" name="_method" value="ADD">
+            <button class="btn btn-primary">Accepter</button>
+        </form>
+        <form class="ms-2" method="post" action="{{ path('consultant_' ~ path ~ '_delete') }}">
+            <input type="hidden" name="_token"
+                   value="{{ csrf_token('delete' ~ entity.id) }}">
+            <input type="hidden" name="delete" value="{{ entity.id }}">
+            <input type="hidden" name="_method" value="DELETE">
+            <button class="btn btn-danger">Refuser</button>
+        </form>
+    </div>
+</td>

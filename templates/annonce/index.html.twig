@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container mt-3">
+
+        <h2>Rechercher une annonce :</h2>
+
+        {{ form_start(search) }}
+        <div class="row">
+            <div class="col-5">
+                {{ form_row(search.title) }}
+            </div>
+
+            <div class="col-5 ">
+                {{ form_row(search.city) }}
+            </div>
+
+            <div class="col-2 align-items-center d-flex mb-3">
+                <button class="btn btn-primary" type="submit">Rechercher</button>
+            </div>
+
+        </div>
+        {{ form_end(search) }}
+
+        <hr class="my-4">
+
+        <h1>Nos annonces</h1>
+
+        {% for annonce in annonces %}
+            <a class="card-body card mb-3 text-decoration-none" role="button" href="{{ path('annonce_show', { 'id': annonce.id }) }}">
+                <div class="card-title">
+                    <h5>{{ annonce.title }}</h5>
+                </div>
+                <p class="card-text">
+                    {{ annonce.description|length > 300 ? annonce.description|slice(0, 300) ~ '...' : annonce.description}}
+                </p>
+                <div class="row">
+                    <p class="card-text">{{annonce.profilRecruteur.postalCode|slice(0, 2) ~ ' - ' ~ annonce.profilRecruteur.city }}</p>
+
+                </div>
+            </a>
+        {% endfor %}
+        {{ knp_pagination_render(annonces) }}
+    </div>
+{% endblock %}

@@ -1,0 +1,26 @@
+Email: Email
+Password: Mot de passe
+mail: Mail
+firstname: Prénom
+lastname: Nom de famille
+cv: cv
+'Email :': 'Email :'
+'Mot de passe :' : 'Mot de passe :'
+'Vous êtes :': 'Vous êtes :'
+'Nouveau mot de passe :': 'Nouveau mot de passe :'
+'Confimer le mot de passe :': 'Confimer le mot de passe :'
+'Nouvelle adresse mail :': 'Nouvelle adresse mail :'
+"Confirmer l'email :": "Confirmer l'email :"
+'Prénom :': 'Prénom :'
+'Nom de famille :': 'Nom de famille :'
+'Cv :': 'Cv :'
+"Nom de l'entreprise :": "Nom de l'entreprise :"
+"Adresse :": "Adresse :"
+"Code postal :": "Code postal :"
+"Ville :": "Ville :"
+'Intitulé du poste :': 'Intitulé du poste :'
+'Description du poste :': 'Description du poste :'
+'Salaire :': 'Salaire :'
+'Heures :': 'Heures :'
+Recruteur: Recruteur
+Candidat: Candidat

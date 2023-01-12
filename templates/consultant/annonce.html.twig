@@ -1,0 +1,17 @@
+{% extends 'consultant/_management.html.twig' %}
+
+{% block h1 %}
+    <h1>Gérer les créations d'annonces.</h1>
+{% endblock %}
+
+{% block thead %}
+    <th>Email Recruteur</th>
+    <th>Titre de l'annonce</th>
+    <th>Actions</th>
+{% endblock %}
+
+{% block tds %}
+    <td>{{ entity.profilRecruteur.user.email }}</td>
+    <td>{{ entity.title }}</td>
+    {%  include 'consultant/_management_form.html.twig' with {'path': 'annonce', 'entity': entity} %}
+{% endblock %}

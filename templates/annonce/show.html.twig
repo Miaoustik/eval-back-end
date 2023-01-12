@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-8 ">
+                <h1>{{ annonce.title }}</h1>
+                <p>{{ annonce.description }}</p>
+            </div>
+            <div class="col-4 border-start">
+                <ul>
+                    <li>Horaires : {{ annonce.hours }}h.</li>
+                    <li>Adresse : {{ annonce.profilRecruteur.address }}</li>
+                    <li>Code postal : {{ annonce.profilRecruteur.postalCode }}</li>
+                    <li>Ville: {{ annonce.profilRecruteur.city }}</li>
+                    <li>Salaire : {{ annonce.salary }}</li>
+                </ul>
+                {% include '_flashes.html.twig' %}
+                {%  if is_granted('ROLE_CANDIDAT') %}
+                    {% if postuler == true %}
+                        <form action="{{ path('candidat_postuler', {'id': annonce.id}) }}" method="post">
+                            <input type="hidden" name="postuler" value="{{ csrf_token('postuler' ~ annonce.id) }}">
+                            <button class="btn btn-primary" onclick="return confirm('Etes-vous sur de vouloir postuler à cette annonce ?')">Postuler</button>
+                        </form>
+                    {% else %}
+                        <div class="alert alert-success">Vous avez déjà postuler à cette annonce.</div>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+        <hr>
+        <p>Candidature(s) : {{ candidatures| length }}</p>
+        {% if candidaturesRecruteur is not null and candidaturesRecruteur | length > 0 %}
+            <p>Candidature(s) :</p>
+            {% for candidature in candidatures %}
+                <div class="card card-body">
+                    <p>{{ candidature.profilCandidat.lastname }} {{ candidature.profilCandidat.firstname }}</p>
+                    <p>
+                        <form action="{{ path('recruteur_cv', {'id': candidature.profilCandidat.id}) }}" method="post">
+                            <input type="hidden" name="token" value="{{ csrf_token('cv' ~ candidature.profilCandidat.id) }}">
+                            <button formtarget="_blank" class="btn btn-primary" type="submit">Voir le cv du candidat.</button>
+                        </form>
+                    </p>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+{%  endblock %}

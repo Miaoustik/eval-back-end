@@ -1,0 +1,34 @@
+{%  extends 'base.html.twig' %}
+
+{%  block body %}
+
+    {% block h1 %}
+
+    {% endblock %}
+
+    {% for message in app.flashes('error') %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <table class="table table-stripped">
+        <thead>
+        <tr>
+            {% block thead %}
+
+            {%  endblock %}
+        </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                {% block tds %}
+
+                {%  endblock %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {{ knp_pagination_render(entities) }}
+{%  endblock %}

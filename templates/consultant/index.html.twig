@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container">
+
+    <p>Bonjour {{ app.user.email }}</p>
+
+
+
+    <h1>Gestion</h1>
+
+        {% if countCreate > 0 %}
+            <div class="alert alert-primary">
+                <p>Il y a {{ countCreate }} demande(s) de créations de comptes.</p>
+                <a class="btn btn-primary" href="{{ path('consultant_create_index') }}">Voir les demandes</a>
+            </div>
+        {% endif %}
+
+        {% if countAnnonce > 0 %}
+            <div class="alert alert-primary">
+                <p>Il y a {{ countAnnonce }} demande(s) de créations d'annonces.</p>
+                <a class="btn btn-primary" href="{{ path('consultant_annonce_index') }}">Voir les demandes</a>
+            </div>
+        {% endif %}
+
+        {% if countCandidature > 0 %}
+            <div class="alert alert-primary">
+                <p>Il y a {{ countCandidature }} candidature(s).</p>
+                <a class="btn btn-primary" href="{{ path('consultant_candidature_index') }}">Voir les demandes</a>
+            </div>
+        {% endif %}
+
+        {% if countCandidature == 0 and countAnnonce == 0 and countCreate == 0 %}
+            <div class="alert alert-primary">
+                <p>Aucune demande en cours.</p>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

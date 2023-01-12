@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class=" h-100 ">
+        <div class="row container-fluid align-items-center bg-light">
+            <div class="col-4">
+                <p>TRT Conseil est une agence de recrutement spécialisée dans l’hôtellerie et la restauration.</p>
+            </div>
+            <div class="col-4"></div>
+            <div class="col-4">
+                {% if app.user %}
+                    <div class="mb-3">
+                        Vous êtes connectés en tant que {{ app.user.userIdentifier }}
+                    </div>
+                {% else %}
+                    <h2 class="h3 mb-3 font-weight-normal">Se connecter: </h2>
+                    {{ form_start(loginForm) }}
+                    {% if error %}
+                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
+                    {{ form_widget(loginForm) }}
+                    <button class="btn btn-primary">Se connecter</button>
+                    {{ form_end(loginForm) }}
+                {% endif %}
+            </div>
+        </div>
+        <div class="container">
+            <div class="row ">
+                <div class="col-6 ">
+                    {% if success is not null %}
+                        <div class="align-items-center d-flex h-100">
+                            <div class="alert alert-success align-middle">
+                                <p>Votre compte a bien été crée.
+                                    Un Consultant va traiter votre demande.</p>
+                            </div>
+                        </div>
+                    {% elseif not app.user %}
+                        <h2>Créer un compte :</h2>
+                        {{ form_start(createForm) }}
+                        {{ form_widget(createForm) }}
+                        <button type="submit" class="btn btn-primary">Créer</button>
+                        {{ form_end(createForm) }}
+                    {% else %}
+                        <div class="d-flex align-items-center h-100">
+                            <p>Bonjour {{ app.user.userIdentifier }} un consultant doit valider la création de votre compte
+                                avant que vous puissiez utiliser nos services.
+                            </p>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="col-6">
+                    <p class="mt-5 ml-2">Il y a actuellement {{ countAnnonce }} offre(s) d’emploi sur le site.</p>
+                    <p class="ml-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut quis dui in quam
+                        convallis
+                        scelerisque sed vel nunc. Quisque sed augue interdum, pretium leo ac, ultricies quam. Class
+                        aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Morbi
+                        volutpat viverra leo, nec sagittis metus scelerisque et. Morbi luctus sollicitudin libero vitae
+                        finibus. Nunc elementum consequat erat, a suscipit justo ornare vitae. Aliquam dignissim sit
+                        amet felis ut rhoncus. In consequat lacinia dignissim. Vivamus ac vestibulum lacus.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
