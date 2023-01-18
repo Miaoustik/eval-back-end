@@ -78,9 +78,10 @@ class AddCandidatureController extends AbstractConsultantController
             $emailRecruteur = $profilRecruteur->getUser()->getEmail();
 
             $candidature->setAllowed(true);
+            $appEmail = $this->getParameter('app.email');
 
             $mail = (new TemplatedEmail())
-                ->from(new Address('consultant@trt-conseil.fr', 'Consultant Trt-Conseil'))
+                ->from(new Address($appEmail, 'Trt-Conseil'))
                 ->to(new Address($emailRecruteur, $profilRecruteur->getSocietyName()))
                 ->subject('TRT-Conseil : Candidature pour votre annonce ' . $annonce->getTitle() . '.')
                 ->htmlTemplate('email/candidature.html.twig')
