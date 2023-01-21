@@ -8,6 +8,7 @@ Déploiement en local:
         -php 8.1 avec les extensions (ainsi que l'extension pdo correspondant à votre SGBDR.)
         -un SGBDR
         -composer
+        -symfony cli  https://symfony.com/download
         
     Instructions: 
         -cloner le projet de github
@@ -16,7 +17,7 @@ Déploiement en local:
         -se rendre à la racine du projet et faire un composer install.
         -faire php bin/console doctrine:database create si vous n'avez pas encore créer votre base de donnée.
         -faire un php bin/console doctrine:migrations:migrate pour préparer votre base de données à recevoir les données.
-        -tester le serveur a faisant php bin/console server:start
+        -tester le serveur a faisant symfony server:start
 
     Un admin peut être créé avec :
         -php bin/console app:add-admin
